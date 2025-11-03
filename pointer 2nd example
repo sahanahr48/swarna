@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    int data = 10;
+    int *ptr; 
+
+    ptr = &data; 
+
+    
+    printf("Value of data: %d\n", data);                  
+    printf("Address of data: %p\n", (void*)&data);         
+    printf("Value stored in ptr (Address of data): %p\n", (void*)ptr);
+    printf("Value accessed via ptr (*ptr): %d\n", *ptr);  
+
+    
+    *ptr = 20; 
+
+    
+    printf("New value of data after *ptr = 20: %d\n", data); 
+
+    return 0;

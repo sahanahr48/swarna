@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <limits.h> 
+int findMax(int arr[], int n) {
+    if (n == 0) {
+        return INT_MIN; // Handle empty array
+    }
+
+    
+    int max = arr[0]; 
+
+    // 2. Loop: Executes 'n-1' times
+    for (int i = 1; i < n; i++) {
+        // 3. Comparison and Assignment: Executes 'n-1' times
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    
+    return max;
+}
+
+int main() {
+    int data[] = {10, 5, 20, 15, 30};
+    int size = sizeof(data) / sizeof(data[0]);
+
+    printf("The maximum element is: %d\n", findMax(data, size));
+    return 0;
+}

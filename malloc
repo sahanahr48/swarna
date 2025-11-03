@@ -1,0 +1,36 @@
+int main() {
+    int size;
+    int *dynamicArray; // Pointer to hold the base address of the array
+
+    // 1. Get the desired size from the user
+    printf("Enter the size of the array: ");
+    scanf("%d", &size);
+
+    // 2. Dynamic Memory Allocation
+    // malloc(number_of_elements * size_of_each_element)
+    // We cast the void* returned by malloc to an int*
+    dynamicArray = (int*)malloc(size * sizeof(int));
+
+    // Check if allocation failed (e.g., system ran out of memory)
+    if (dynamicArray == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1; // Return non-zero to indicate an error
+    }
+
+    // 3. Use the Array (Initialization)
+    printf("Initializing the array...\n");
+    for (int i = 0; i < size; i++) {
+        dynamicArray[i] = i * 10; // Assigning values: 0, 10, 20, 30...
+        printf("Element %d: %d\n", i, dynamicArray[i]);
+    }
+
+    // 4. Memory Deallocation (Essential Step)
+    // free() releases the memory block pointed to by dynamicArray
+    free(dynamicArray);
+    
+    // Good practice: set the pointer to NULL after freeing
+    dynamicArray = NULL; 
+
+    printf("\nMemory successfully freed.\n");
+
+    return 0;

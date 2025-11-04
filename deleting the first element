@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+    int arr[100], n, i;
+
+    // Input number of elements
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    // Input array elements
+    printf("Enter %d elements:\n", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Delete last element (just reduce the size)
+    if (n == 0) {
+        printf("Array is already empty.\n");
+    } else {
+        n--;  // Decrease size to remove last element
+        printf("Last element deleted successfully.\n");
+    }
+
+    // Display new array
+    printf("Array after deletion:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}

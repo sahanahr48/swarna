@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int R, C;
+    printf("Enter rows and columns: ");
+    scanf("%d %d", &R, &C);
+
+    // Allocate a single block for R*C elements
+    int *mat = (int *)malloc(R * C * sizeof(int));
+    if (mat == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    // Input matrix elements
+    printf("Enter elements (%d x %d):\n", R, C);
+    for (int i = 0; i < R; i++) {
+        for (int j = 0; j < C; j++) {
+            scanf("%d", mat + i * C + j);
+        }
+    }
+
+    printf("\nOriginal Matrix:\n");
+    for (int i = 0; i < R; i++) {
+        for (int j = 0; j < C; j++) {
+            printf("%d ", *(mat + i * C + j));
+        }
+        printf("\n");
+    }
+
+    // If square, print transpose directly
+    if (R == C) {
+        printf("\nTranspose (in-place):\n");
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                printf("%d ", *(mat + j * C + i));
+            }
+            printf("\n");
+        }
+    } 
+    // If not square, allocate new memory for transpose
+    else {
+        int *trans = (int *)malloc(C * R * sizeof(int));
+        if (trans == NULL) {
+            printf("Memory allocation failed!\n");
+            free(mat);
+            return 1;
+        }
+
+        // Compute transpose
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                *(trans + j * R + i) = *(mat + i * C + j);
+            }
+        }
+
+        printf("\nTranspose (new matrix):\n");
+        for (int i = 0; i < C; i++) {
+            for (int j = 0; j < R; j++) {
+                printf("%d ", *(trans + i * R + j));
+            }
+            printf("\n");
+        }
+
+        free(trans);
+    }
+
+    free(mat);
+    return 0;
+}

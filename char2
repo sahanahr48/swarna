@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+char *my_strdup(const char *src) {
+    if (src == NULL)
+        return NULL;
+
+    // Find the length of src
+    const char *temp = src;
+    while (*temp)
+        temp++;
+
+    size_t len = temp - src;
+
+    // Allocate memory for the duplicate (+1 for null terminator)
+    char *dup = (char *)malloc(len + 1);
+    if (dup == NULL)
+        return NULL;
+
+    // Copy the string using pointers
+    char *dst = dup;
+    while (*src)
+        *dst++ = *src++;
+
+    *dst = '\0'; // Null-terminate the new string
+
+    return dup;
+}
+
+int main() {
+    char original[] = "Hello, world!";
+    char *copy = my_strdup(original);
+
+    if (copy != NULL) {
+        printf("Original: %s\n", original);
+        printf("Copy: %s\n", copy);
+        free(copy); // Always free dynamically allocated memory
+    } else {
+        printf("Memory allocation failed!\n");
+    }
+
+    return 0;
+}
